@@ -34,7 +34,6 @@ server.use(cors());
 //   post api login
 server.post('/api/login', (req, res) => {
     let { username, password } = req.body;
-    const hash = bcrypt.hashSync(user.password, 10)
     Users.findBy({ username })
       .first()
       .then(user => {
@@ -50,6 +49,26 @@ server.post('/api/login', (req, res) => {
   });
 
 //    api users
+// function restricted(req, res, next){
+//     let { username,password } = req.headers;
+      
+//     if(username && password){
+//     Users.findBy({username})
+//     .first()
+//     .then(user => {
+//       if (user && bcrypt.compareSync(password, user.password)){
+//         next()
+//       } else{
+//         res.status(401).json({message: "invalid cred "})
+//       }
+//     })
+//     .catch(error => {
+//       res.status(501).json({mesage:"unexpected error"})
+//     })
+//   }  else {
+//     res.status(400).json({message: "no cred available"})
+//    }
+//   }
 server.get('/api/users', (req, res) => {
     Users.find()
       .then(users => {
