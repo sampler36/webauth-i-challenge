@@ -49,6 +49,15 @@ server.post('/api/login', (req, res) => {
       });
   });
 
+//    api users
+server.get('/api/users', (req, res) => {
+    Users.find()
+      .then(users => {
+        res.json(users);
+      })
+      .catch(err => res.send(err));
+  });
+
 // 
 const port = process.env.PORT || 2500;
 server.listen(port, () =>
